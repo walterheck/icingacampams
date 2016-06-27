@@ -17,13 +17,11 @@ class profile::icinga::server {
   include ::icinga2::feature::command
 
   class { '::icinga2::feature::api':
-    manage_zone => false,
   }
 
   # icinga2::pki::puppet class needs to be declared
   # after the icinga2::feature::api class in order
   # to avoid resource duplication
-
   contain ::icinga2::pki::puppet
 
   Icinga2::Object::Host <<| |>>
