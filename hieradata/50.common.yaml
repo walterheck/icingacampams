@@ -39,3 +39,5 @@ ssh::server::permit_root_login: 'without-password'
 'icingaweb::mysql_fqdn': "%{hiera('icinga::mysql_fqdn')}"
 'icingaweb::mysql_ipaddress': "%{hiera('icinga::mysql_ipaddress')}"
 'icingaweb::webdb_password': "password"
+
+'mysql::whitelist_range': '10.20.1.%'
