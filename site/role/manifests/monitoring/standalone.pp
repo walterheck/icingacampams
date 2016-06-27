@@ -4,4 +4,5 @@ class role::monitoring::standalone {
   include profile::icinga::server
   include profile::icinga::db
   include profile::icinga::checks
+  include profile::mysql
 }
