@@ -1,0 +1,12 @@
+---
+:merge_behavior: deeper
+:backends:
+  - yaml
+:logger: console
+:yaml:
+  :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
+:hierarchy:
+  - "10.fqdn/%{fqdn}"
+  - "30.osfamily/%{osfamily}"
+  - "40.lsbdistcodename/%{lsbdistcodename}"
+  - "50.common"
