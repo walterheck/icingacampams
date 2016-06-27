@@ -7,9 +7,9 @@ exec { 'create-ssh-key':
 #https://docs.puppetlabs.com/references/latest/type.html#sshkey
 sshkey { 'github.com':
   ensure => present,
-  type   => 'ecdsa-sha2-nistp256',
+  type   => 'ssh-rsa',
   target => '/root/.ssh/known_hosts',
-  key    => 'AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDw3fj8seCnMtJTnNSehf+Fl1xlCtgP3GOcwjSTZHHt7wHdip32C9PplZtNej+t1LWSmaW41JNyNxlSoYer1Kys='
+  key    => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
 } ->
 
 class { 'r10k':
@@ -17,7 +17,7 @@ class { 'r10k':
   configfile => '/etc/puppetlabs/r10k/r10k.yaml',
   sources    => {
     'puppet' => {
-      'remote'  => 'https://gitlab.olindata.com/opstheater/opstheater.git',
+      'remote'  => 'https://github.com/walterheck/icingacampams.git',
       'basedir' => $::settings::environmentpath,
       'prefix'  => false,
     }
