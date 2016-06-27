@@ -27,9 +27,10 @@ class profile::base {
     create_resources('package', $packages)
   }
 
+  include profile::base::icinga
+
   # apply basic icinga checks to servers
   if $::fqdn != hiera('icingaweb::fqdn') {
-    include profile::base::icinga
     include profile::icinga::client
   }
 
