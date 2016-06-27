@@ -3,50 +3,50 @@ class profile::icinga::web {
   $icinga2_web_fqdn = hiera('icingaweb::fqdn')
   $icinga2_db_fqdn = hiera('icingaweb::mysql_fqdn')
 
-  $icinga2_ssl_cert = "/etc/httpd/ssl/${icinga2_web_fqdn}.crt";
-  $icinga2_ssl_bundle = "/etc/httpd/ssl/${icinga2_web_fqdn}-cabundle.crt";
-  $icinga2_ssl_key = "/etc/httpd/ssl/${icinga2_web_fqdn}.key";
+  # $icinga2_ssl_cert = "/etc/httpd/ssl/${icinga2_web_fqdn}.crt";
+  # $icinga2_ssl_bundle = "/etc/httpd/ssl/${icinga2_web_fqdn}-cabundle.crt";
+  # $icinga2_ssl_key = "/etc/httpd/ssl/${icinga2_web_fqdn}.key";
 
   $icinga2_db_ipaddress = hiera('icingaweb::mysql_ipaddress')
   $icinga2_webdb_password = hiera('icingaweb::webdb_password')
   $icinga2_ido_password = hiera('icinga::ido_password')
 
-  # Make our Apache ssl directory
-  file { ['/etc/httpd/ssl'] :
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'apache',
-    group  => 'apache',
-  }
+  # # Make our Apache ssl directory
+  # file { ['/etc/httpd/ssl'] :
+  #   ensure => directory,
+  #   mode   => '0755',
+  #   owner  => 'apache',
+  #   group  => 'apache',
+  # }
+  #
+  # # Create our Icinga2 Apache SSL Key
+  # file { $icinga2_ssl_key :
+  #   ensure  => file,
+  #   source  => 'puppet:///modules/opstheater/ssl/icinga.key',
+  #   require => File['/etc/httpd/ssl'],
+  #   mode    => '0644',
+  #   owner   => 'apache',
+  # }
+  #
+  # # Create our Icinga2 Apache SSL Cert
+  # file { $icinga2_ssl_cert :
+  #   ensure  => file,
+  #   source  => 'puppet:///modules/opstheater/ssl/icinga.crt',
+  #   require => File['/etc/httpd/ssl'],
+  #   mode    => '0644',
+  #   owner   => 'apache',
+  #   group   => 'apache',
+  # }
 
-  # Create our Icinga2 Apache SSL Key
-  file { $icinga2_ssl_key :
-    ensure  => file,
-    source  => 'puppet:///modules/opstheater/ssl/icinga.key',
-    require => File['/etc/httpd/ssl'],
-    mode    => '0644',
-    owner   => 'apache',
-  }
-
-  # Create our Icinga2 Apache SSL Cert
-  file { $icinga2_ssl_cert :
-    ensure  => file,
-    source  => 'puppet:///modules/opstheater/ssl/icinga.crt',
-    require => File['/etc/httpd/ssl'],
-    mode    => '0644',
-    owner   => 'apache',
-    group   => 'apache',
-  }
-
-  # Create our Icinga2 Apache SSL Key
-  file { $icinga2_ssl_bundle :
-    ensure  => file,
-    source  => 'puppet:///modules/opstheater/ssl/icinga-cabundle.crt',
-    require => File['/etc/httpd/ssl'],
-    mode    => '0644',
-    owner   => 'apache',
-    group   => 'apache',
-  }
+  # # Create our Icinga2 Apache SSL Key
+  # file { $icinga2_ssl_bundle :
+  #   ensure  => file,
+  #   source  => 'puppet:///modules/opstheater/ssl/icinga-cabundle.crt',
+  #   require => File['/etc/httpd/ssl'],
+  #   mode    => '0644',
+  #   owner   => 'apache',
+  #   group   => 'apache',
+  # }
 
   if ! defined (Class['epel']) {
     class { 'epel': }
@@ -55,36 +55,36 @@ class profile::icinga::web {
   class { '::mysql::client': }
 
   class { 'apache':
-    default_ssl_key   => $icinga2_ssl_key,
-    default_ssl_cert  => $icinga2_ssl_cert,
-    default_ssl_chain => $icinga2_ssl_bundle,
+    # default_ssl_key   => $icinga2_ssl_key,
+    # default_ssl_cert  => $icinga2_ssl_cert,
+    # default_ssl_chain => $icinga2_ssl_bundle,
   }
 
   ::apache::listen { '80':
     before => Class['icingaweb2::config'],
   }
 
-  if hiera('opstheater::http_mode') == 'https' {
-
-    ::apache::listen { '443':
-      before => Class['icingaweb2::config'],
-    }
-
-    apache::vhost { "${icinga2_web_fqdn} non-ssl":
-      servername      => $icinga2_web_fqdn,
-      port            => '80',
-      docroot         => '/var/www/redirect',
-      redirect_status => 'permanent',
-      redirect_dest   => "https://${icinga2_web_fqdn}/"
-    }
-
-    apache::vhost { "${icinga2_web_fqdn} ssl":
-      servername => $icinga2_web_fqdn,
-      port       => '443',
-      docroot    => '/var/www/redirect',
-      ssl        => true,
-    }
-  }
+  # if hiera('opstheater::http_mode') == 'https' {
+  #
+  #   ::apache::listen { '443':
+  #     before => Class['icingaweb2::config'],
+  #   }
+  #
+  #   apache::vhost { "${icinga2_web_fqdn} non-ssl":
+  #     servername      => $icinga2_web_fqdn,
+  #     port            => '80',
+  #     docroot         => '/var/www/redirect',
+  #     redirect_status => 'permanent',
+  #     redirect_dest   => "https://${icinga2_web_fqdn}/"
+  #   }
+  #
+  #   apache::vhost { "${icinga2_web_fqdn} ssl":
+  #     servername => $icinga2_web_fqdn,
+  #     port       => '443',
+  #     docroot    => '/var/www/redirect',
+  #     ssl        => true,
+  #   }
+  # }
 
   class { 'apache::mod::php': }
 
