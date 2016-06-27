@@ -23,3 +23,19 @@ profile::base::packages:
   lsof:
     ensure: present
 ssh::server::permit_root_login: 'without-password'
+
+
+##########################
+## icinga related settings
+##########################
+
+'icinga::fqdn': "icinga2.icingacampams.vm"
+'icinga::ipaddress': '10.20.1.20'
+'icinga::mysql_fqdn': "%{hiera('icinga::fqdn')}"
+'icinga::mysql_ipaddress': "%{hiera('icinga::ipaddress')}"
+'icinga::ido_password': "password"
+'icingaweb::fqdn': "%{hiera('icinga::fqdn')}"
+'icingaweb::ipaddress': "%{hiera('icinga::ipaddress')}"
+'icingaweb::mysql_fqdn': "%{hiera('icinga::mysql_fqdn')}"
+'icingaweb::mysql_ipaddress': "%{hiera('icinga::mysql_ipaddress')}"
+'icingaweb::webdb_password': "password"
