@@ -27,11 +27,10 @@ class profile::base {
     create_resources('package', $packages)
   }
 
-  include profile::base::icinga
-
   # apply basic icinga checks to servers
   if $::fqdn != hiera('icingaweb::fqdn') {
     include profile::icinga::client
+    include profile::base::icinga
   }
 
   $rand1 = fqdn_rand(30)
