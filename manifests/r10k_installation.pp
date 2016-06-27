@@ -13,7 +13,7 @@ sshkey { 'github.com':
 } ->
 
 class { 'r10k':
-  version    => '2.0.3',
+  version    => '2.3.0',
   configfile => '/etc/puppetlabs/r10k/r10k.yaml',
   sources    => {
     'puppet' => {
