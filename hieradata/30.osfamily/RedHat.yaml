@@ -1,0 +1,24 @@
+---
+profile::base::packages:
+  'mlocate':
+    ensure: present
+  'ruby':
+    ensure: present
+  'ruby-devel':
+    ensure: present
+  'rubygems':
+    ensure: present
+  'vim-enhanced':
+    ensure: present
+  'jq':
+    ensure: present
+    require: 'Yumrepo[epel]'
+  joe:
+    ensure: present
+    require: 'Yumrepo[epel]'
+  iperf:
+    ensure: present
+    require: 'Yumrepo[epel]'
+  htop:
+    ensure: present
+    require: 'Yumrepo[epel]'

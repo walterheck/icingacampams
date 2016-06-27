@@ -1,0 +1,25 @@
+---
+profile::base::packages:
+  screen:
+    ensure: present
+  mtr:
+    ensure: present
+  curl:
+    ensure: present
+  bash:
+    ensure: latest
+  iotop:
+    ensure: present
+  ethtool:
+    ensure: present
+  tcpdump:
+    ensure: present
+  nano:
+    ensure: present
+  telnet:
+    ensure: present
+  sysstat:
+    ensure: present
+  lsof:
+    ensure: present
+ssh::server::permit_root_login: 'without-password'
