@@ -16,18 +16,6 @@ class profile::icinga::server {
 
   include ::icinga2::feature::command
 
-  icinga2::object::zone { 'global-templates':
-    global  => true,
-  }
-
-  icinga2::object::zone { 'master':
-    endpoints => {
-      $icinga2_web_fqdn => {
-        host => $icinga2_web_fqdn,
-      },
-    },
-  }
-
   class { '::icinga2::feature::api':
     manage_zone => false,
   }
@@ -40,6 +28,5 @@ class profile::icinga::server {
 
   Icinga2::Object::Host <<| |>>
   Icinga2::Object::Service <<| |>>
-  Icinga2::Object::Zone <<| |>>
 
 }
