@@ -2,8 +2,8 @@ class profile::icinga::client {
 
   include ::icinga2
 
-  # include ::icinga2::feature::command
-  #
+  include ::icinga2::feature::command
+
   # class { '::icinga2::feature::api':
   #   accept_commands => true,
   #   accept_config   => true,
