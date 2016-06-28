@@ -21,4 +21,10 @@ class profile::base::icinga {
   }
 
   Icinga2::Object::Endpoint <<| host == $::ipaddress_enp0s8 |>>
+
+  icinga2::object::zone { 'master':
+    endpoints => {
+      $::fqdn
+    },
+  }
 }
