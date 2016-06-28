@@ -17,6 +17,7 @@ class profile::icinga::server {
   include ::icinga2::feature::command
 
   class { '::icinga2::feature::api':
+    manage_zone => false,
   }
 
   # icinga2::pki::puppet class needs to be declared
