@@ -24,7 +24,9 @@ class profile::base::icinga {
 
   icinga2::object::zone { 'master':
     endpoints => {
-      $::fqdn
+      $::fqdn => {
+        host => $::ipaddress_enp0s8,
+      },
     },
   }
 }
