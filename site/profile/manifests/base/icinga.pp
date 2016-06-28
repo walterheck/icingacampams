@@ -16,4 +16,8 @@ class profile::base::icinga {
     },
   }
 
+  @@icinga2::object::endpoint { $::fqdn:
+    host => $::ipaddress_enp0s8,
+  }
+
 }
