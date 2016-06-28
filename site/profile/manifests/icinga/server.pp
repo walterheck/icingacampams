@@ -25,6 +25,7 @@ class profile::icinga::server {
   contain ::icinga2::pki::puppet
 
   Icinga2::Object::Host <<| |>>
+  Icinga2::Object::Endpoint <<| |>>
   Icinga2::Object::Service <<| |>>
 
 }
