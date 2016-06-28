@@ -20,6 +20,18 @@ class profile::icinga::server {
     manage_zone => false,
   }
 
+  icinga2::object::zone { 'global-templates':
+    global  => true,
+  }
+
+  icinga2::object::zone { 'master':
+    endpoints => {
+      $icinga2_web_fqdn => {
+        host => $icinga2_web_fqdn,
+      },
+    },
+  }
+
   # icinga2::pki::puppet class needs to be declared
   # after the icinga2::feature::api class in order
   # to avoid resource duplication
@@ -28,5 +40,5 @@ class profile::icinga::server {
   Icinga2::Object::Host <<| |>>
   Icinga2::Object::Service <<| |>>
   Icinga2::Object::Zone <<| |>>
-  
+
 }
