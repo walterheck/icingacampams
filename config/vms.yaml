@@ -20,3 +20,9 @@ vms:
   hostname: peclient.icingacampams.vm
   roles:
   - pe-puppet-agent
+- name: icingacampams
+  box: puppetlabs/centos-7.2-64-nocm
+  private_networks: [ {ip: '10.20.1.201'} ]
+  hostname: icingacampams.icingacampams.vm
+  roles:
+  - pe-puppet-agent

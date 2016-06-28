@@ -9,3 +9,7 @@ node 'icinga2.icingacampams.vm' {
 node 'peclient.icingacampams.vm' {
   include role::testclient
 }
+
+node 'icingacampams.icingacampams.vm' {
+  include role::testclient
+}
