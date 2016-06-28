@@ -7,6 +7,7 @@ class profile::icinga::client {
   class { '::icinga2::feature::api':
     accept_commands => true,
     accept_config   => true,
+    manage_zone => false,
   }
 
   # icinga2::pki::puppet class needs to be declared
