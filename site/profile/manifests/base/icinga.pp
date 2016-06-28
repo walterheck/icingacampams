@@ -20,4 +20,5 @@ class profile::base::icinga {
     host => $::ipaddress_enp0s8,
   }
 
+  Icinga2::Object::Endpoint <<| host == $::ipaddress_enp0s8 |>>
 }
