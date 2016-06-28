@@ -3,7 +3,6 @@ class profile::icinga::client {
   $icinga2_web_fqdn = hiera('icingaweb::fqdn')
 
   include ::icinga2
-
   include ::icinga2::feature::command
 
   class { '::icinga2::feature::api':

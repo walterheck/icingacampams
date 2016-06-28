@@ -1,5 +1,6 @@
 class profile::base::icinga {
 
+  # resource default
   Icinga2::Object::Host {
     display_name    => $::fqdn,
     check_command   => 'cluster-zone',
